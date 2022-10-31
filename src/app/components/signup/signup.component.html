@@ -1,0 +1,42 @@
+<div style="text-align: center; margin-top: 100px">
+  <h1>Sign Upd</h1>
+</div>
+
+<div class="signup">
+  <input class="form-control" #username type="text" placeholder="username" />
+  <input class="form-control" #fullName type="text" placeholder="full name" />
+  <input class="form-control" #email type="text" placeholder="email" />
+  <input
+    class="form-control"
+    #password1
+    type="password"
+    placeholder="password"
+  />
+  <input
+    class="form-control"
+    #password2
+    type="password"
+    placeholder="confirm password"
+  />
+  <button
+    class="btn btn-fill btn-danger"
+    (click)="
+      signup(
+        username.value,
+        email.value,
+        password1.value,
+        password2.value,
+        fullName
+      )
+    "
+  >
+    Sign Up
+  </button>
+  <p>{{ error?.message }}</p>
+  <p *ngIf="error">{{ error?.error | json }}</p>
+  `
+  <p>Already have an existing account?</p>
+  <button class="btn btn-fill btn-alert" (click)="loginRedirect()">
+    Login now
+  </button>
+</div>

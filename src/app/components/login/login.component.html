@@ -1,0 +1,22 @@
+<div style="text-align: center; margin-top: 100px">
+  <h1>Login</h1>
+</div>
+<div class="login">
+  <input class="form-control" #username type="text" placeholder="username" />
+  <input
+    class="form-control"
+    #password
+    type="password"
+    placeholder="password"
+  />
+  <button
+    class="btn btn-fill btn-danger"
+    (click)="login(username.value, password.value)"
+  >
+    Login
+  </button>
+  <p>You don't have an account?</p>
+  <button class="btn btn-fill btn-alert" (click)="signup()">Signup now</button>
+  <p>{{ error?.message }}</p>
+  <p *ngIf="error">{{ error?.error | json }}</p>
+</div>

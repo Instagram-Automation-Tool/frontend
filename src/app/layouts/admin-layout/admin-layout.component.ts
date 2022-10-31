@@ -9,11 +9,14 @@ export class AdminLayoutComponent implements OnInit {
   public sidebarColor: string = 'blue';
 
   constructor() {}
+
+  ngOnInit() {this.changeSidebarColor('blue')}
+
   changeSidebarColor(color){
     var sidebar = document.getElementsByClassName('sidebar')[0];
     var mainPanel = document.getElementsByClassName('main-panel')[0];
 
-    this.sidebarColor = color;
+    this.sidebarColor = 'white';
 
     if(sidebar != undefined){
         sidebar.setAttribute('data',color);
@@ -22,6 +25,7 @@ export class AdminLayoutComponent implements OnInit {
         mainPanel.setAttribute('data',color);
     }
   }
+  
   changeDashboardColor(color:string){
     var body = document.getElementsByTagName('body')[0];
     if (body && color === 'white-content') {
@@ -31,5 +35,5 @@ export class AdminLayoutComponent implements OnInit {
       body.classList.remove('white-content');
     }
   }
-  ngOnInit() {this.changeSidebarColor('blue')}
+  
 }
