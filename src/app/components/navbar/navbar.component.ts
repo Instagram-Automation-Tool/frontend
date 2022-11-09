@@ -3,7 +3,9 @@ import { ROUTES } from "../sidebar/sidebar.component";
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-
+import { Store } from "@ngrx/store";
+import * as fromAuth from '../../state/auth/auth.reducer'
+import { map } from "rxjs";
 @Component({
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
@@ -19,28 +21,31 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public isCollapsed = true;
 
   closeResult: string;
-
+  user$ = this.store.select(fromAuth.selectUser)
+  
   constructor(
     location: Location,
     private element: ElementRef,
     private router: Router,
-    private modalService: NgbModal
-  ) {
-    this.location = location;
-    this.sidebarVisible = false;
-  }
-  // function that adds color white/transparent to the navbar on resize (this is for the collapse)
-   updateColor = () => {
-   var navbar = document.getElementsByClassName('navbar')[0];
-     if (window.innerWidth < 993 && !this.isCollapsed) {
-       navbar.classList.add('bg-white');
-       navbar.classList.remove('navbar-transparent');
-     } else {
-       navbar.classList.remove('bg-white');
-       navbar.classList.add('navbar-transparent');
-     }
-   };
-  ngOnInit() {
+    private modalService: NgbModal,
+    private store: Store<fromAuth.State>
+    ) {
+      this.location = location;
+      this.sidebarVisible = false;
+    }
+    // function that adds color white/transparent to the navbar on resize (this is for the collapse)
+    updateColor = () => {
+      var navbar = document.getElementsByClassName('navbar')[0];
+      if (window.innerWidth < 993 && !this.isCollapsed) {
+        navbar.classList.add('bg-white');
+        navbar.classList.remove('navbar-transparent');
+      } else {
+        navbar.classList.remove('bg-white');
+        navbar.classList.add('navbar-transparent');
+      }
+    };
+    ngOnInit() {
+
     window.addEventListener("resize", this.updateColor);
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
