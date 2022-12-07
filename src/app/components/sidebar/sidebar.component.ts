@@ -23,11 +23,19 @@ export const ROUTES: RouteInfo[] = [
   //   class: ""
   // },
   {
-    path: "/maps",
-    title: "Maps",
-    rtlTitle: "خرائط",
-    icon: "icon-pin",
-    class: "" },
+    path: "/instagram",
+    title: "Instagram ",
+    rtlTitle: "قائمة الجدول",
+    icon: "icon-molecule-40",
+    class: ""
+  },
+  // {
+  //   path: "/maps",
+  //   title: "Maps",
+  //   rtlTitle: "خرائط",
+  //   icon: "icon-pin",
+  //   class: "" 
+  // },
   {
     path: "/notifications",
     title: "Notifications",
@@ -43,20 +51,21 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-single-02",
     class: ""
   },
-  {
-    path: "/tables",
-    title: "Table List",
-    rtlTitle: "قائمة الجدول",
-    icon: "icon-puzzle-10",
-    class: ""
-  },
-  {
-    path: "/typography",
-    title: "Typography",
-    rtlTitle: "طباعة",
-    icon: "icon-align-center",
-    class: ""
-  },
+  // {
+  //   path: "/tables",
+  //   title: "Table List",
+  //   rtlTitle: "قائمة الجدول",
+  //   icon: "icon-puzzle-10",
+  //   class: ""
+  // },
+  
+  // {
+  //   path: "/typography",
+  //   title: "Typography",
+  //   rtlTitle: "طباعة",
+  //   icon: "icon-align-center",
+  //   class: ""
+  // },
   // {
   //   path: "/rtl",
   //   title: "RTL Support",

@@ -1,0 +1,296 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="title">Instagram Authentication</h4>
+        </div>
+        <div class="card-body pb-0">
+          <form autocomplete="off">
+            <div class="row">
+              <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                  <label> Username </label>
+                  <input
+                    class="form-control"
+                    placeholder="davidbeckham..."
+                    type="text"
+                    #usernameIG
+                    autocomplete="false"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div class="col-md-6 pl-md-1">
+                <div class="form-group">
+                  <label> Password </label>
+                  <input
+                    class="form-control"
+                    placeholder="password"
+                    type="text"
+                    autocomplete="false"
+                    #passwordIG
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button
+            class="btn btn-simple btn-success"
+            (click)="loginIG(usernameIG.value, passwordIG.value)"
+            type="submit"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+      <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------------------------------------------- -->
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="title">Follow Profile</h4>
+            </div>
+            <div class="card-body pb-0">
+              <form autocomplete="off">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label> Username </label>
+                      <input
+                        class="form-control"
+                        placeholder="davidbeckham..."
+                        type="text"
+                        #followUsername
+                        autocomplete="false"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <button
+                class="btn btn-simple btn-success"
+                (click)="followProfile(followUsername.value)"
+                type="submit"
+              >
+                Follow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="title">Like Posts</h4>
+            </div>
+            <div class="card-body pb-0">
+              <form autocomplete="off">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label> Post Link </label>
+                      <input
+                        class="form-control"
+                        placeholder="https:instagram.com/p/..."
+                        type="text"
+                        #likePostLink
+                        autocomplete="false"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <button
+                class="btn btn-simple btn-success"
+                (click)="likePost(likePostLink.value)"
+                type="submit"
+              >
+                Like
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h4 class="title">Comment Profiles</h4>
+        </div>
+        <div class="card-body pb-0">
+          <form autocomplete="off">
+            <div class="row">
+              <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                  <label> Profile username </label>
+                  <input
+                    class="form-control"
+                    placeholder="dybala..."
+                    type="text"
+                    #targetUsername
+                    autocomplete="false"
+                    value=""
+                  />
+                </div>
+                <div class="form-group">
+                  <label> Number of posts </label>
+                  <input
+                    class="form-control"
+                    placeholder="999"
+                    type="number"
+                    #numberOfPosts
+                    autocomplete="false"
+                    value=""
+                  />
+                </div>
+                <div class="form-group">
+                  <label> Comment Text </label>
+                  <input
+                    class="form-control"
+                    placeholder="I love your content '"
+                    type="text"
+                    #commentText
+                    autocomplete="false"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button
+            class="btn btn-simple btn-success"
+            (click)="
+              commentLikesProfile(
+                targetUsername.value,
+                commentText.value,
+                numberOfPosts.value
+              )
+            "
+            type="submit"
+          >
+            Comment
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h4 class="title">Scrape Followers Profiles</h4>
+        </div>
+        <div class="card-body pb-0">
+          <form autocomplete="off">
+            <div class="row">
+              <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                  <label> Username </label>
+                  <input
+                    class="form-control"
+                    placeholder="davidbeckham..."
+                    type="text"
+                    #scrapeUsername
+                    autocomplete="false"
+                    value=""
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-2 pl-md-1">
+                <div class="form-group">
+                  <label> Amount </label>
+                  <input
+                    class="form-control"
+                    placeholder="1234.."
+                    type="number"
+                    autocomplete="false"
+                    #scrapeAmount
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button
+            class="btn btn-simple btn-success"
+            (click)="scrapeFollowers(scrapeUsername.valu, scrapeAmount.value)"
+            type="submit"
+          >
+            Scrape
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="card-body">
+          <p class="card-text"></p>
+          <div class="author">
+            <div class="block block-one"></div>
+            <div class="block block-two"></div>
+            <div class="block block-three"></div>
+            <div class="block block-four"></div>
+
+            <div *ngFor="let account of accounts$ | async">
+              <div class="card mt-3">
+                <div class="card-body">
+                  <p class="card-text"></p>
+
+                  <a
+                    target="_blank"
+                    href="https://instagram.com/{{ account.username }}"
+                  >
+                    <img src="assets/img/emilyz.jpg" alt="..." class="avatar" />
+
+                    <h4 class="title" *ngIf="user$ | async; let user">
+                      {{ account.username }}
+                    </h4>
+                  </a>
+
+                  <p class="description">Bio: {{ account.bio }}</p>
+                  <div class="row mt-4">
+                    <div class="col-md-4">
+                      <label style="font-size: 16px"
+                        >Followers: {{ account.followerCount }}</label
+                      >
+                    </div>
+                    <div class="col-md-4">
+                      <label style="font-size: 16px">
+                        Following: {{ account.followingCount }}</label
+                      >
+                    </div>
+                    <div class="col-md-4">
+                      <label style="font-size: 16px"
+                        >Posts: {{ account.postsCount }}</label
+                      >
+                    </div>
+                  </div>
+                  <!-- <div class="card-description">
+                    I think this will be the place to put the IG user bio
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

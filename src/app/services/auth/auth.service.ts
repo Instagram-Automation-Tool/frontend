@@ -7,7 +7,9 @@ import { tap, shareReplay, catchError } from 'rxjs/operators';
 
 import jwt_decode from "jwt-decode"
 import * as moment from 'moment';
-import { User } from '../models/User';
+import { User } from '../../models/User';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../../state/auth/auth.actions'
 
 
 @Injectable()
@@ -15,15 +17,18 @@ export class AuthService {
 
   private apiRoot = 'http://localhost:8000/api/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private store: Store) { }
 
-  private getUserData(authResult){
-    const token = authResult.user.tokens.access
+  public getUserData(authResult): Observable<User>{
+    const token = authResult.access
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      'Authorization': `Bearer ${token}`
     });
-    return this.http.get(this.apiRoot.concat('user/me'),{headers:headers}).subscribe(data=> console.log(data))
+
+    const requestOptions = { headers: headers };
+
+    return this.http.get(this.apiRoot.concat('user/'),requestOptions)
   }
 
   private setSession(authResult) {
@@ -40,13 +45,12 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    console.log(email + password)
     return this.http.post(
       this.apiRoot.concat('login/'),
       { user:{email, password} }
     ).pipe(
       tap(response => {
-        this.getUserData(response)
+        this.store.dispatch(AuthActions.loginSuccess({user:response}))
         this.setSession(response)
       }),
       shareReplay(),
@@ -66,15 +70,16 @@ export class AuthService {
   }
 
   refreshToken() {
-    if (moment().isBetween(this.getExpiration().subtract(1, 'days'), this.getExpiration())) {
       return this.http.post(
         this.apiRoot.concat('token/refresh/'),
         { refresh: this.token }
       ).pipe(
-        tap(response => console.log(response)),
+        tap(async response => {  
+        this.getUserData(response).subscribe(response=> this.store.dispatch(AuthActions.loginSuccess({user:response})))
+      }),
         shareReplay(),
       ).subscribe();
-    }
+
   }
 
   getExpiration() {
@@ -109,14 +114,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
-
-    if (token) {
+    if (req.url =='http://localhost:8000/api/user/'){
+        return next.handle(req)
+    } 
+    else if (token) {
       const cloned = req.clone({
         headers: req.headers.set('Authorization', 'JWT '.concat(token))
       });
-
       return next.handle(cloned);
-    } else {
+    }
+    else{
       return next.handle(req);
     }
   }
