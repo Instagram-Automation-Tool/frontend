@@ -21,6 +21,20 @@ export class InstagramService {
   }
 
   followProfile(username: string){
-    return this.http.get(this.apiRoot.concat('follow'))
+    const igLink = 'https://instagram.com/'+ username
+    return this.http.get(this.apiRoot.concat(`follow?link=${igLink}&username=expandio1234`))
+  }
+
+  likeProfile(link:string){
+    return (this.http.get(this.apiRoot.concat(`like?link=${link}&username=expandio1234`)))
+
+  }
+  scrapeFollowers(username:string,amount:number){
+    const igLink='https://www.instagram.com/' + username +'/'
+    return this.http.get(this.apiRoot.concat(`scrapefollowers?link=${igLink}&amount=${amount}&username=expandio1234`))
+  }
+
+  commentOnProfilePosts(target:string, comments:string,count:number){
+    return this.http.get(this.apiRoot.concat(`commentOnProfilePosts?targetUsername=${target}&comment=${comments}&like=on&count=${count}&username=expandio1234`))
   }
 }

@@ -50,8 +50,8 @@
     }
 
     .avatar {
-      width: 124px;
-      height: 124px;
+      width: 80px;
+      height: 80px;
       border: 5px solid lighten($black,5%);
       border-bottom-color: $transparent-bg;
       background-color: $transparent-bg;
@@ -59,7 +59,10 @@
     }
 
     .card-body {
-        min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 200px;
     }
 
     hr {

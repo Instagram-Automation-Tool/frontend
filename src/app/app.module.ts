@@ -22,6 +22,7 @@ import { environment } from "src/environments/environment";
 import { authReducer } from "./state/auth/auth.reducer";
 import { EffectsModule } from "@ngrx/effects";
 import { AuthEffects } from "./state/auth/auth.effects";
+import { NgOptimizedImage, provideImgixLoader } from '@angular/common';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AuthEffects } from "./state/auth/auth.effects";
     NgbModule,
     RouterModule,
     AppRoutingModule,
+    NgOptimizedImage,
     ToastrModule.forRoot(),
     StoreModule.forRoot({auth: authReducer}),
     StoreDevtoolsModule.instrument({
@@ -43,11 +45,15 @@ import { AuthEffects } from "./state/auth/auth.effects";
     EffectsModule.forRoot([AuthEffects])
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent, SignupComponent],
-  providers: [AuthService, AuthGuard, {
+  providers: [
+    AuthService, 
+    provideImgixLoader('https://scontent-mxp1-1.cdninstagram.com/'),
+    AuthGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi:true,
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule {}
