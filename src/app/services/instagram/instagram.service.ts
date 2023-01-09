@@ -20,21 +20,21 @@ export class InstagramService {
     return this.http.get(this.apiRoot.concat(`storecredentials?username=${username}&password=${password}`))
   }
 
-  followProfile(username: string){
+  followProfile(username: string,profile:string){
     const igLink = 'https://instagram.com/'+ username
-    return this.http.get(this.apiRoot.concat(`follow?link=${igLink}&username=expandio1234`))
+    return this.http.get(this.apiRoot.concat(`follow?link=${igLink}&username=${profile}`))
   }
 
-  likeProfile(link:string){
-    return (this.http.get(this.apiRoot.concat(`like?link=${link}&username=expandio1234`)))
+  likeProfile(link:string,profile:string){
+    return (this.http.get(this.apiRoot.concat(`like?link=${link}&username=${profile}`)))
 
   }
-  scrapeFollowers(username:string,amount:number){
+  scrapeFollowers(username:string,amount:number,profile:string){
     const igLink='https://www.instagram.com/' + username +'/'
-    return this.http.get(this.apiRoot.concat(`scrapefollowers?link=${igLink}&amount=${amount}&username=expandio1234`))
+    return this.http.get(this.apiRoot.concat(`scrapefollowers?link=${igLink}&amount=${amount}&username=${profile}`))
   }
 
-  commentOnProfilePosts(target:string, comments:string,count:number){
-    return this.http.get(this.apiRoot.concat(`commentOnProfilePosts?targetUsername=${target}&comment=${comments}&like=on&count=${count}&username=expandio1234`))
+  commentOnProfilePosts(target:string, comments:string,count:number, profile:string){
+    return this.http.get(this.apiRoot.concat(`commentOnProfilePosts?targetUsername=${target}&comment=${comments}&like=on&count=${count}&username=${profile}`))
   }
 }

@@ -12,11 +12,12 @@ export class InstagramComponent implements OnInit {
   
   user$ = this.store.select(fromAuth.selectUser)
   accounts$ =this.igService.getAccounts()
-  defaultIgProfile = 'expandio1234'
+  selectedProfile = ''
   constructor(private store: Store<fromAuth.State>, private igService: InstagramService,private toastr:ToastrService) {}
 
-  onCheckChange(profile:string){
-    this.defaultIgProfile=profile
+  selectProfile(profile:string){
+    this.selectedProfile=profile
+    console.log(this.selectedProfile)
   }
 
   loginIG(username: string, password: string){
@@ -43,8 +44,7 @@ export class InstagramComponent implements OnInit {
   }
 
   likePost(link:string){
-   
-    this.igService.likeProfile(link).subscribe(
+    this.igService.likeProfile(link,this.selectedProfile).subscribe(
       {
         next:(data)=> { 
           this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Liked successfully!', '', {
@@ -61,7 +61,7 @@ export class InstagramComponent implements OnInit {
   }
 
   followProfile(username: string){
-    this.igService.followProfile(username).subscribe(
+    this.igService.followProfile(username,this.selectedProfile).subscribe(
         {
             next:()=> {
               this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Followed successfully!', '', {
@@ -73,14 +73,20 @@ export class InstagramComponent implements OnInit {
               });
             },
             error:(error)=> {
-                console.log(error)
+              this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> '+ ' ' + error.error.text, '', {
+                disableTimeOut: true,
+                closeButton: true,
+                enableHtml: true,
+                toastClass: "alert alert-danger",
+                positionClass: 'toast-' + 'bottom' + '-' +  'right'
+              });
             }
         }
     )
   }
 
   scrapeFollowers(username:string,amount:number){
-    this.igService.scrapeFollowers(username,amount).subscribe({
+    this.igService.scrapeFollowers(username,amount,this.selectedProfile).subscribe({
       next:(data)=> {
         console.log(data),
         this.toastr.info('<span class="tim-icons icon-bell-55" [data-notify]="icon"></span> Scraped successfully!', '', {
@@ -98,7 +104,7 @@ export class InstagramComponent implements OnInit {
   }
 
   commentLikesProfile(target:string,comments:string,count:number){
-    this.igService.commentOnProfilePosts(target,comments,count).subscribe({
+    this.igService.commentOnProfilePosts(target,comments,count,this.selectedProfile).subscribe({
       next:(data)=> console.log(data),
       error:(error)=> console.log(error)
     })
