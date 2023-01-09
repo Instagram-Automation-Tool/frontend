@@ -6728,6 +6728,7 @@ button.bg-darker:focus {
 
 .border {
   border: 0.0625rem solid #e9ecef !important;
+  border-radius: 8px;
 }
 
 .border-top {
@@ -17744,3 +17745,6 @@ Copyright (c) 2015 Daniel Eden
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+.selectedProfile{
+  border: 1px solid red;
+}
